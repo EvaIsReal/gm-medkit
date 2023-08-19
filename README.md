@@ -1,0 +1,3 @@
+## GM-Medkit
+Der stationäre Verbandskasten kann gecraftet oder gekauft und auf eigenen Grundstücken platziert werden können.
+Die Nutzung soll limitiert sein (z.B. nur alle 30 Minuten). Um Kampfsituationen nicht ausnutzen zu können soll man sich nicht in wenigen Sekunden komplett vollgeheilt haben, sondern den Prozess der Regeneration eine Weile dauern lassen. Ebenfalls soll die Anschaffung entsprechend Kosten und das Auffüllen mehr als ein normaler Heal (eigene Wiederbelebung nicht möglich).
