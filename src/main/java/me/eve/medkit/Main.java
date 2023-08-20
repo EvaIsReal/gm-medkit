@@ -3,10 +3,12 @@ package me.eve.medkit;
 import me.eve.medkit.events.BlockInteraction;
 import me.eve.medkit.events.PlayerInteract;
 import me.eve.medkit.events.PlayerMove;
-import me.eve.medkit.items.GMItems;
-import me.eve.medkit.items.MedkitItem;
-import me.eve.medkit.items.SmallChestItem;
+import me.eve.medkit.items.*;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {
@@ -36,6 +38,8 @@ public final class Main extends JavaPlugin {
             return false;
         });
 
+        getRecipes();
+
         getServer().getPluginManager().registerEvents(new PlayerInteract(), instance);
         getServer().getPluginManager().registerEvents(new BlockInteraction(), instance);
         getServer().getPluginManager().registerEvents(new PlayerMove(), instance);
@@ -46,6 +50,20 @@ public final class Main extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+    }
+
+    private void getRecipes() {
+        ShapedRegister bandAidRecipe = new ShapedRegister(new BandAid().item());
+        bandAidRecipe.shape("ppp", "pap", "ppp");
+        bandAidRecipe.setIngredient('p', Material.PAPER);
+        bandAidRecipe.setIngredient('a', Material.GOLDEN_APPLE);
+        bandAidRecipe.register();
+
+        ShapedRegister medkitRecipe = new ShapedRegister(new MedkitItem().item());
+        medkitRecipe.shape("www", "bbb", "www");
+        medkitRecipe.setIngredient('w', Material.WOOD);
+        medkitRecipe.setIngredient('b', new BandAid().item());
+        medkitRecipe.register();
     }
 
     public static Main getInstance() {
