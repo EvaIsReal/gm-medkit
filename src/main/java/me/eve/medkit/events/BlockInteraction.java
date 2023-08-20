@@ -25,7 +25,6 @@ public class BlockInteraction implements Listener {
         switch (key) {
             case "medkit":
                 p.sendMessage(GMUtils.color("&bVerbandskasten wurde platziert."));
-
                 break;
         }
 
@@ -35,11 +34,11 @@ public class BlockInteraction implements Listener {
     public void onBreak(BlockBreakEvent e) {
         Player p = e.getPlayer();
         Block block = e.getBlock();
-        e.setDropItems(false);
 
         try {
             String value = GMUtils.getSkullValue(e.getBlock());
             if(value.equals(GMItems.ITEMS.get("medkit"))) {
+                e.setDropItems(false);
                 p.sendMessage(GMUtils.color("&bVerbandskasten entfernt."));
 
                 if(!(p.getGameMode() == GameMode.CREATIVE))

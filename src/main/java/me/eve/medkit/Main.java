@@ -1,7 +1,6 @@
 package me.eve.medkit;
 
 import me.eve.medkit.events.BlockInteraction;
-import me.eve.medkit.events.InventoryClick;
 import me.eve.medkit.events.PlayerInteract;
 import me.eve.medkit.events.PlayerMove;
 import me.eve.medkit.items.GMItems;
@@ -28,7 +27,6 @@ public final class Main extends JavaPlugin {
         });
 
         getServer().getPluginManager().registerEvents(new PlayerInteract(), instance);
-        getServer().getPluginManager().registerEvents(new InventoryClick(), instance);
         getServer().getPluginManager().registerEvents(new BlockInteraction(), instance);
         getServer().getPluginManager().registerEvents(new PlayerMove(), instance);
 

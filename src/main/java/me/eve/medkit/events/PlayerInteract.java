@@ -1,7 +1,6 @@
 package me.eve.medkit.events;
 
 import me.eve.medkit.GMUtils;
-import me.eve.medkit.exceptions.InteractionFailedException;
 import me.eve.medkit.items.GMItems;
 import me.eve.medkit.items.MedkitItem;
 import org.bukkit.Material;
@@ -15,8 +14,6 @@ public class PlayerInteract implements Listener {
 
     @EventHandler
     public void onInteract(PlayerInteractEvent e) {
-        //if(e.hasItem()) return;
-
         if(e.getHand() == EquipmentSlot.OFF_HAND) {
             e.setCancelled(true);
             return;
@@ -29,9 +26,7 @@ public class PlayerInteract implements Listener {
 
         if(value.equals(GMItems.ITEMS.get("medkit"))) {
             MedkitItem medkit = new MedkitItem();
-            try {
-                medkit.execute(e);
-            } catch (InteractionFailedException ex) {}
+            medkit.execute(e);
         }
 
 
