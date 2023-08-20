@@ -5,6 +5,7 @@ import me.eve.medkit.events.PlayerInteract;
 import me.eve.medkit.events.PlayerMove;
 import me.eve.medkit.items.GMItems;
 import me.eve.medkit.items.MedkitItem;
+import me.eve.medkit.items.SmallChestItem;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -17,11 +18,20 @@ public final class Main extends JavaPlugin {
         // Plugin startup logic
         instance = this;
         GMItems.register();
-        getCommand("givemedkit").setExecutor((sender, command, label, args) -> {
+        getCommand("giveitem").setExecutor((sender, command, label, args) -> {
             if(sender instanceof Player) {
                 Player p = (Player) sender;
-                MedkitItem medkit = new MedkitItem();
-                p.getInventory().addItem(medkit.item());
+                switch (args[0]) {
+                    case "1":
+                        p.getInventory().addItem(new MedkitItem().item());
+                        break;
+                    case "2":
+                        p.getInventory().addItem(new SmallChestItem().item());
+                        break;
+                    default:
+                        p.sendMessage(GMUtils.color("&cKein solches item gefunden."));
+                        break;
+                }
             }
             return false;
         });

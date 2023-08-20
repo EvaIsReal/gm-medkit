@@ -32,7 +32,7 @@ public class MedkitItem extends GMItem implements Interactable {
         item.setItemMeta(im);
 
         NBT.modify(item, nbt -> {
-            nbt.setString("interactable", "medkit");
+            nbt.setString("interactable", key());
 
             final ReadWriteNBT skullOwnerCompound = nbt.getOrCreateCompound("SkullOwner");
             skullOwnerCompound.setUUID("Id", UUID.randomUUID());
@@ -61,7 +61,9 @@ public class MedkitItem extends GMItem implements Interactable {
                 p.setHealth(20.0);
                 p.setFoodLevel(20);
                 GMUtils.sendActionbar(p, GMUtils.color("&eGeheilt!"));
+
                 p.spawnParticle(Particle.HEART, p.getLocation(), 6, .5, 1, .5);
+                p.playSound(p.getLocation(), Sound.ITEM_ARMOR_EQUIP_LEATHER, 1, 2);
             });
             PlayerManager.setMedkitCooldown(p.getUniqueId(), 90*1000);
         } else {

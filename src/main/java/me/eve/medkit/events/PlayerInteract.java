@@ -1,8 +1,10 @@
 package me.eve.medkit.events;
 
+import de.tr7zw.nbtapi.NbtApiException;
 import me.eve.medkit.GMUtils;
 import me.eve.medkit.items.GMItems;
 import me.eve.medkit.items.MedkitItem;
+import me.eve.medkit.items.SmallChestItem;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,14 +22,19 @@ public class PlayerInteract implements Listener {
         }
 
         if(e.getAction() != Action.RIGHT_CLICK_BLOCK) return;
-        if(e.getClickedBlock().getType() != Material.SKULL) return;
 
-        String value = GMUtils.getSkullValue(e.getClickedBlock());
+        // Damit NBT-API keine NPE bei
+        //if(e.getClickedBlock().getType() != Material.SKULL) return;
 
-        if(value.equals(GMItems.ITEMS.get("medkit"))) {
-            MedkitItem medkit = new MedkitItem();
-            medkit.execute(e);
-        }
+        try {
+            String value = GMUtils.getSkullValue(e.getClickedBlock());
+
+            if(value.equals(GMItems.ITEMS.get("medkit"))) {
+                new MedkitItem().execute(e);
+            } else if (value.equals(GMItems.ITEMS.get("small_chest"))) {
+                new SmallChestItem().execute(e);
+            }
+        } catch (NbtApiException ignored) {}
 
 
     }
