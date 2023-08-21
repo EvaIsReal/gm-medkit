@@ -69,8 +69,10 @@ public class MedkitItem extends GMItem implements Interactable {
             });
 
             new BukkitRunnable() {
+                int t = 0;
                 @Override
                 public void run() {
+                    if(t >= 10) this.cancel();
                     if(p.getLocation().getX() != loc.getX() && p.getLocation().getZ() != loc.getZ()) {
                         if(PlayerManager.PLAYER_TASKS.containsKey(e.getPlayer().getUniqueId())) {
 
@@ -83,6 +85,7 @@ public class MedkitItem extends GMItem implements Interactable {
                             this.cancel();
                         }
                     }
+                    t++;
                 }
             }.runTaskTimer(Main.getInstance(), 0, 20);
 
