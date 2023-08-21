@@ -1,6 +1,7 @@
 package me.eve.medkit.player;
 
 import me.eve.medkit.Main;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
@@ -13,6 +14,7 @@ public class PlayerManager {
 
     public static final HashMap<UUID, Long> MEDKIT_COOLDOWNS = new HashMap<>();
     public static final HashMap<UUID, BukkitTask> PLAYER_TASKS = new HashMap<>();
+    public static final HashMap<UUID, Location> PLAYER_LOCATIONS = new HashMap<>();
 
     public static void setMedkitCooldown(UUID uuid, long cooldownMillis) {
         MEDKIT_COOLDOWNS.put(uuid, cooldownMillis + System.currentTimeMillis());
